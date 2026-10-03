@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Trần Phi Hải — Tech Profile & Bio Link</title>
+    <meta name="description" content="Trang cá nhân phong cách công nghệ hiện đại của Trần Phi Hải - Lớp A2 THPT Tân Yên Số 2.">
+
+    <!-- Google Fonts: Outfit, Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #060813;
+            --bg-surface: rgba(13, 19, 38, 0.72);
+            --bg-surface-hover: rgba(20, 29, 58, 0.85);
+            --border-glow: rgba(0, 242, 254, 0.28);
+            --border-glow-focus: rgba(0, 242, 254, 0.75);
+            --cyan-neon: #00f2fe;
+            --blue-neon: #4facfe;
+            --purple-neon: #8a2be2;
+            --violet-neon: #a855f7;
+            --emerald-neon: #00f5a0;
+            --pink-neon: #ff007a;
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+            --text-cyan: #38bdf8;
+            --font-head: 'Outfit', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --card-shadow: 0 30px 90px rgba(0, 0, 0, 0.75), 0 0 45px rgba(0, 242, 254, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(138, 43, 226, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(0, 242, 254, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 55%);
+            font-family: var(--font-body);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 32px 16px;
+            position: relative;
+            overflow-x: hidden;
+            perspective: 1200px;
+        }
+
+        /* ==== CANVAS HẠT NỀN CÔNG NGHỆ (CYBER PARTICLES) ==== */
+        #cyber-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Lưới công nghệ mờ nền */
+        .tech-grid-bg {
+            position: fixed;
+            inset: 0;
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ==== THANH ĐIỀU KHIỂN HUD TRÊN CÙNG ==== */
+        .top-hud-bar {
+            position: fixed;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(10, 15, 30, 0.82);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 242, 254, 0.22);
+            border-radius: 999px;
+            padding: 6px 16px;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 242, 254, 0.15);
+        }
+
+        .hud-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--emerald-neon);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--emerald-neon);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--emerald-neon);
+            animation: pulseGlow 1.8s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 10px var(--emerald-neon); }
+            50% { transform: scale(1.4); opacity: 0.6; box-shadow: 0 0 18px var(--emerald-neon); }
+        }
+
+        .hud-divider {
+            width: 1px;
+            height: 14px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .hud-action-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.25s;
+        }
+
+        .hud-action-btn:hover {
+            color: var(--cyan-neon);
+            background: rgba(0, 242, 254, 0.1);
+        }
+
+        .hud-action-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ==== CARD CONTAINER (3D PERSPECTIVE) ==== */
+        .card-container {
+            width: 100%;
+            max-width: 530px;
+            position: relative;
+            z-index: 10;
+            margin-top: 48px;
+            margin-bottom: 24px;
+            transform-style: preserve-3d;
+            transition: transform 0.18s ease-out;
+        }
+
+        .profile-card {
+            background: var(--bg-surface);
+            backdrop-filter: blur(28px) saturate(190%);
+            -webkit-backdrop-filter: blur(28px) saturate(190%);
+            border: 1px solid var(--border-glow);
+            border-radius: 28px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            position: relative;
+            animation: cyberEntrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .profile-card:hover {
+            border-color: var(--border-glow-focus);
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.85), 0 0 60px rgba(0, 242, 254, 0.22);
+        }
+
+        @keyframes cyberEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(45px) scale(0.92);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Vệt sáng quét theo chuột */
+        .card-glare {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 242, 254, 0.12) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 5;
+            transition: opacity 0.3s;
+            opacity: 0;
+        }
+
+        .profile-card:hover .card-glare {
+            opacity: 1;
+        }
+
+        /* Cyber Corner Accents */
+        .cyber-corner {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-color: var(--cyan-neon);
+            pointer-events: none;
+            z-index: 12;
+            opacity: 0.6;
+            transition: opacity 0.3s, border-color 0.3s;
+        }
+
+        .profile-card:hover .cyber-corner {
+            opacity: 1;
+        }
+
+        .corner-tl { top: 12px; left: 12px; border-top: 2px solid; border-left: 2px solid; }
+        .corner-tr { top: 12px; right: 12px; border-top: 2px solid; border-right: 2px solid; }
+        .corner-bl { bottom: 12px; left: 12px; border-bottom: 2px solid; border-left: 2px solid; }
+        .corner-br { bottom: 12px; right: 12px; border-bottom: 2px solid; border-right: 2px solid; }
+
+        /* ==== HEADER SECTION (HIGH-TECH HUD) ==== */
+        .header {
+            position: relative;
+            padding: 44px 28px 28px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(0, 242, 254, 0.08) 0%, rgba(138, 43, 226, 0.05) 50%, transparent 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            overflow: hidden;
+        }
+
+        /* Scanline quét liên tục */
+        .scanline {
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 242, 254, 0.12) 50%, transparent 100%);
+            animation: scanAnim 4s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes scanAnim {
+            0% { top: -100%; }
+            100% { top: 200%; }
+        }
+
+        /* ==== CYBER AVATAR VỚI VÒNG XOAY NĂNG LƯỢNG ==== */
+        .avatar-wrapper {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+            z-index: 2;
+        }
+
+        /* Vòng ngoài tia quét radar */
+        .avatar-radar-ring {
+            position: absolute;
+            inset: -12px;
+            border-radius: 50%;
+            border: 1px dashed rgba(0, 242, 254, 0.45);
+            animation: spinCounter 16s linear infinite;
+        }
+
+        @keyframes spinCounter {
+            100% { transform: rotate(-360deg); }
+        }
+
+        /* Vòng phát sáng Neon Conic */
+        .avatar-glow-ring {
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--cyan-neon), var(--purple-neon), var(--emerald-neon), var(--cyan-neon));
+            animation: spinRing 4.5s linear infinite;
+            filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.65));
+        }
+
+        @keyframes spinRing {
+            100% { transform: rotate(360deg); }
+        }
+
+        .avatar-core {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #030712 100%);
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: inset 0 0 25px rgba(0, 242, 254, 0.35);
+        }
+
+        .avatar-core:hover {
+            transform: scale(1.08) rotate(5deg);
+        }
+
+        .avatar-letter {
+            font-family: var(--font-head);
+            font-size: 64px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff 30%, var(--cyan-neon) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 12px rgba(0, 242, 254, 0.8));
+            user-select: none;
+        }
+
+        /* Huy hiệu Verified Tech Badge */
+        .avatar-badge {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 32px;
+            height: 32px;
+            background: #090d1a;
+            border: 2px solid var(--cyan-neon);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cyan-neon);
+            z-index: 3;
+            box-shadow: 0 0 12px rgba(0, 242, 254, 0.6);
+            animation: badgeFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes badgeFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        /* ==== TÊN & DANH HIỆU ==== */
+        .name-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .name {
+            font-family: var(--font-head);
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ffffff 20%, #a5f3fc 60%, var(--cyan-neon) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 18px rgba(0, 242, 254, 0.4));
+            margin-bottom: 8px;
+        }
+
+        .tech-id-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            border-radius: 999px;
+            padding: 4px 14px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--cyan-neon);
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .job-title {
+            font-size: 15px;
+            color: var(--text-sub);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .job-title .highlight {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* ==== BODY NỘI DUNG ==== */
+        .body {
+            padding: 28px 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Giới thiệu Tech Bio */
+        .bio-box {
+            background: rgba(0, 242, 254, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 3px solid var(--cyan-neon);
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-bottom: 24px;
+            font-size: 14.5px;
+            line-height: 1.65;
+            color: #cbd5e1;
+            position: relative;
+        }
+
+        .bio-box strong {
+            color: var(--cyan-neon);
+            font-weight: 600;
+        }
+
+        /* Tech Tags Mini Badges */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+            justify-content: center;
+        }
+
+        .tech-tag {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-sub);
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.25s;
+        }
+
+        .tech-tag:hover {
+            color: var(--cyan-neon);
+            border-color: var(--cyan-neon);
+            background: rgba(0, 242, 254, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* Section Title HUD */
+        .section-title-hud {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--cyan-neon);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+        }
+
+        .section-title-hud .hud-code {
+            color: var(--text-sub);
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        /* ==== THÔNG TIN CÁ NHÂN (TECH SPECS GRID) ==== */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-bottom: 26px;
+        }
+
+        .info-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 14px;
+            padding: 13px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: transparent;
+            transition: background 0.3s;
+        }
+
+        .info-card:hover {
+            background: rgba(22, 33, 62, 0.75);
+            border-color: rgba(0, 242, 254, 0.35);
+            transform: translateX(4px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 242, 254, 0.1);
+        }
+
+        .info-card:hover::before {
+            background: var(--cyan-neon);
+        }
+
+        .info-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-icon-box {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cyan-neon);
+            flex-shrink: 0;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .info-card:hover .info-icon-box {
+            transform: scale(1.1) rotate(5deg);
+            background: rgba(0, 242, 254, 0.18);
+        }
+
+        .info-icon-box svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: var(--text-sub);
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-val {
+            font-size: 14.5px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-top: 1px;
+        }
+
+        .info-chip {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--cyan-neon);
+            border: 1px solid rgba(0, 242, 254, 0.25);
+        }
+
+        .copy-btn {
+            background: rgba(0, 242, 254, 0.12);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            color: var(--cyan-neon);
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--cyan-neon);
+            color: #060813;
+            box-shadow: 0 0 12px var(--cyan-neon);
+        }
+
+        /* ==== CÁC NÚT LIÊN HỆ CYBER (MẠNG XÃ HỘI) ==== */
+        .social-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .cyber-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(15, 23, 42, 0.7);
+        }
+
+        /* Tia sáng lướt qua nút */
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .cyber-btn:hover::before {
+            left: 120%;
+        }
+
+        .cyber-btn:hover {
+            transform: translateY(-3px) scale(1.015);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .btn-icon-wrapper {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: transform 0.3s;
+        }
+
+        .cyber-btn:hover .btn-icon-wrapper {
+            transform: scale(1.12);
+        }
+
+        .btn-icon-wrapper svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .btn-content {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .btn-meta {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .btn-title {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-arrow {
+            color: rgba(255, 255, 255, 0.5);
+            transition: transform 0.25s, color 0.25s;
+        }
+
+        .cyber-btn:hover .btn-arrow {
+            color: #ffffff;
+            transform: translateX(4px);
+        }
+
+        /* Phong cách riêng cho từng nền tảng */
+        .btn-tiktok-tech {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(20, 20, 30, 0.9) 100%);
+            border-color: rgba(0, 242, 254, 0.35);
+        }
+        .btn-tiktok-tech:hover {
+            border-color: #fe2c55;
+            box-shadow: 0 10px 30px rgba(254, 44, 85, 0.25), 0 0 20px rgba(0, 242, 254, 0.2);
+        }
+        .btn-tiktok-tech .btn-icon-wrapper {
+            color: #ffffff;
+            border-color: rgba(0, 242, 254, 0.4);
+        }
+
+        .btn-facebook-tech {
+            background: linear-gradient(135deg, rgba(10, 30, 70, 0.85) 0%, rgba(15, 45, 110, 0.85) 100%);
+            border-color: rgba(59, 130, 246, 0.35);
+        }
+        .btn-facebook-tech:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+        .btn-facebook-tech .btn-icon-wrapper {
+            color: #60a5fa;
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-zalo-tech {
+            background: linear-gradient(135deg, rgba(0, 50, 100, 0.85) 0%, rgba(0, 90, 160, 0.85) 100%);
+            border-color: rgba(0, 180, 255, 0.35);
+        }
+        .btn-zalo-tech:hover {
+            border-color: #00b4ff;
+            box-shadow: 0 10px 30px rgba(0, 180, 255, 0.3);
+        }
+        .btn-zalo-tech .btn-icon-wrapper {
+            color: #38bdf8;
+            border-color: rgba(0, 180, 255, 0.4);
+        }
+
+        /* ==== TOOLBAR NHANH (QUICK ACTIONS) ==== */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .action-tool-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .action-tool-btn:hover {
+            background: rgba(0, 242, 254, 0.1);
+            border-color: var(--cyan-neon);
+            color: var(--cyan-neon);
+            transform: translateY(-2px);
+        }
+
+        .action-tool-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ==== FOOTER HIGH-TECH ==== */
+        .footer {
+            text-align: center;
+            padding: 20px 24px;
+            background: rgba(6, 10, 22, 0.85);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-sub);
+            position: relative;
+        }
+
+        .footer .cyber-heart {
+            color: var(--pink-neon);
+            display: inline-block;
+            animation: pulseHeart 1.4s ease infinite;
+        }
+
+        @keyframes pulseHeart {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px var(--pink-neon)); }
+            50% { transform: scale(1.35); filter: drop-shadow(0 0 8px var(--pink-neon)); }
+        }
+
+        .footer-specs {
+            margin-top: 6px;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.35);
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        /* ==== POPUP QR MODAL HIGH-TECH ==== */
+        .qr-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(6, 9, 20, 0.85);
+            backdrop-filter: blur(16px);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .qr-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .qr-card {
+            background: #0d1326;
+            border: 1px solid var(--cyan-neon);
+            border-radius: 24px;
+            padding: 30px;
+            max-width: 360px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 242, 254, 0.25);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .qr-modal.active .qr-card {
+            transform: scale(1);
+        }
+
+        .qr-close-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .qr-close-btn:hover {
+            background: rgba(255, 0, 100, 0.4);
+            transform: rotate(90deg);
+        }
+
+        .qr-box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 16px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+        }
+
+        .qr-laser-line {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--cyan-neon);
+            box-shadow: 0 0 10px var(--cyan-neon);
+            animation: laserScan 2.5s ease-in-out infinite;
+        }
+
+        @keyframes laserScan {
+            0%, 100% { top: 0%; opacity: 0.2; }
+            50% { top: 97%; opacity: 1; }
+        }
+
+        .qr-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* ==== TOAST THÔNG BÁO HUD ==== */
+        .hud-toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(40px);
+            background: rgba(10, 16, 32, 0.95);
+            border: 1px solid var(--cyan-neon);
+            border-radius: 999px;
+            padding: 10px 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 242, 254, 0.35);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 300;
+        }
+
+        .hud-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* ==== RESPONSIVE MOBILE ==== */
+        @media (max-width: 480px) {
+            body {
+                padding: 16px 12px;
+            }
+
+            .card-container {
+                margin-top: 40px;
+            }
+
+            .header {
+                padding: 34px 18px 22px;
+            }
+
+            .avatar-wrapper {
+                width: 118px;
+                height: 118px;
+            }
+
+            .avatar-letter {
+                font-size: 52px;
+            }
+
+            .name {
+                font-size: 26px;
+                letter-spacing: 1.2px;
+            }
+
+            .body {
+                padding: 20px 16px;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Lưới công nghệ nền -->
+    <div class="tech-grid-bg"></div>
+
+    <!-- Canvas hạt công nghệ tương tác -->
+    <canvas id="cyber-canvas"></canvas>
+
+    <!-- THANH ĐIỀU KHIỂN HUD TRÊN CÙNG -->
+    <div class="top-hud-bar">
+        <div class="hud-status">
+            <span class="pulse-dot"></span>
+            <span>SYSTEM ONLINE</span>
+        </div>
+        <div class="hud-divider"></div>
+        <button class="hud-action-btn" id="soundToggleBtn" title="Bật/Tắt hiệu ứng âm thanh Sci-Fi">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+            <span id="soundStatusText">SFX: ON</span>
+        </button>
+        <div class="hud-divider"></div>
+        <button class="hud-action-btn" id="shareBtn" title="Chia sẻ trang này">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+            <span>SHARE</span>
+        </button>
+    </div>
+
+    <!-- KHUNG CHỨA CARD 3D TILT -->
+    <div class="card-container" id="cardContainer">
+
+        <!-- CARD PROFILE CHÍNH -->
+        <div class="profile-card" id="profileCard">
+
+            <!-- Cyber Corner Accents -->
+            <div class="cyber-corner corner-tl"></div>
+            <div class="cyber-corner corner-tr"></div>
+            <div class="cyber-corner corner-bl"></div>
+            <div class="cyber-corner corner-br"></div>
+
+            <!-- Vệt sáng theo con trỏ chuột -->
+            <div class="card-glare"></div>
+
+            <!-- HEADER HIGH-TECH -->
+            <div class="header">
+                <!-- Tia scanline chạy dọc -->
+                <div class="scanline"></div>
+
+                <!-- Avatar đa tầng với vòng xoay năng lượng -->
+                <div class="avatar-wrapper">
+                    <div class="avatar-radar-ring"></div>
+                    <div class="avatar-glow-ring"></div>
+                    <div class="avatar-core" id="avatarInteractive" title="Trần Phi Hải">
+                        <span class="avatar-letter">H</span>
+                    </div>
+                    <div class="avatar-badge" title="Đã xác thực">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Tên & Danh xưng -->
+                <div class="name-wrapper">
+                    <h1 class="name">TRẦN PHI HẢI</h1>
+                </div>
+
+                <div>
+                    <span class="tech-id-badge">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                        ID: #TPH-2010 // DEV PROFILE
+                    </span>
+                </div>
+
+                <p class="job-title">
+                    <span>⚡ Học sinh</span>
+                    <span class="highlight">Lớp A2</span>
+                    <span>• THPT Tân Yên Số 2</span>
+                </p>
+            </div>
+
+            <!-- BODY NỘI DUNG -->
+            <div class="body">
+
+                <!-- Giới thiệu ngắn dạng Tech Terminal -->
+                <div class="bio-box">
+                    Xin chào! Mình là <strong>Trần Phi Hải</strong>, hiện đang là học sinh lớp <strong>A2</strong> trường <strong>THPT Tân Yên Số 2</strong>. Rất vui được kết nối và giao lưu cùng tất cả các bạn! 🚀
+                </div>
+
+                <!-- Các Tag phong cách công nghệ -->
+                <div class="tech-tags">
+                    <span class="tech-tag">⚡ THPT TÂN YÊN 2</span>
+                    <span class="tech-tag">🎯 CLASS A2</span>
+                    <span class="tech-tag">📍 BẮC GIANG</span>
+                    <span class="tech-tag">🪐 GEN Z • 2010</span>
+                </div>
+
+                <!-- MỤC 1: THÔNG TIN CÁ NHÂN (TECH SPECS MATRIX) -->
+                <div class="section-title-hud">
+                    <span>📌 THÔNG SỐ CÁ NHÂN</span>
+                    <span class="hud-code">[01 // SPECIFICATIONS]</span>
+                </div>
+
+                <div class="info-grid">
+                    <!-- Họ và tên -->
+                    <div class="info-card">
+                        <div class="info-left">
+                            <div class="info-icon-box">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="info-label">Họ và tên</div>
+                                <div class="info-val">Trần Phi Hải</div>
+                            </div>
+                        </div>
+                        <span class="info-chip">Chính chủ</span>
+                    </div>
+
+                    <!-- Ngày sinh -->
+                    <div class="info-card">
+                        <div class="info-left">
+                            <div class="info-icon-box">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="info-label">Ngày sinh</div>
+                                <div class="info-val">20 / 09 / 2010</div>
+                            </div>
+                        </div>
+                        <span class="info-chip">Xử Nữ ♍</span>
+                    </div>
+
+                    <!-- Trường học -->
+                    <div class="info-card">
+                        <div class="info-left">
+                            <div class="info-icon-box">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                                    <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="info-label">Trường học</div>
+                                <div class="info-val">THPT Tân Yên Số 2</div>
+                            </div>
+                        </div>
+                        <span class="info-chip">Bắc Giang</span>
+                    </div>
+
+                    <!-- Lớp học -->
+                    <div class="info-card">
+                        <div class="info-left">
+                            <div class="info-icon-box">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="info-label">Lớp học</div>
+                                <div class="info-val">Lớp A2</div>
+                            </div>
+                        </div>
+                        <span class="info-chip">Khóa 52
+                    
+                        </span>
+                    </div>
+
+                    <!-- Zalo / SĐT -->
+                    <div class="info-card">
+                        <div class="info-left">
+                            <div class="info-icon-box">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="info-label">Hotline / Zalo</div>
+                                <div class="info-val">0988 493 910</div>
+                            </div>
+                        </div>
+                        <button class="copy-btn" id="copyPhoneBtn" title="Sao chép số điện thoại">
+                            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            <span>COPY</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- MỤC 2: MẠNG XÃ HỘI (CYBER CONNECT) -->
+                <div class="section-title-hud">
+                    <span>🔗 KẾT NỐI MẠNG XÃ HỘI</span>
+                    <span class="hud-code">[02 // CYBER LINKS]</span>
+                </div>
+
+                <div class="social-grid">
+                    <!-- TikTok -->
+                    <a href="https://www.tiktok.com/@ken200910?_r=1&_t=ZS-9AF4MdwpM4S" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-tiktok-tech">
+                        <div class="btn-left">
+                            <div class="btn-icon-wrapper">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                                </svg>
+                            </div>
+                            <div class="btn-content">
+                                <span class="btn-meta">Theo dõi trên TikTok</span>
+                                <span class="btn-title">@ken200910</span>
+                            </div>
+                        </div>
+                        <div class="btn-arrow">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/share/19m4RRrEWf/" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-facebook-tech">
+                        <div class="btn-left">
+                            <div class="btn-icon-wrapper">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                                </svg>
+                            </div>
+                            <div class="btn-content">
+                                <span class="btn-meta">Kết bạn trang cá nhân</span>
+                                <span class="btn-title">Facebook • Trần Phi Hải</span>
+                            </div>
+                        </div>
+                        <div class="btn-arrow">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <!-- Zalo Direct -->
+                    <a href="https://zalo.me/0988493910" target="_blank" rel="noopener noreferrer" class="cyber-btn btn-zalo-tech">
+                        <div class="btn-left">
+                            <div class="btn-icon-wrapper">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12.49 10.2722v-.4496h1.3467v6.3218h-1.3467v-.4496c-.324.3499-.792.5996-1.3984.5996-1.4576 0-2.4776-1.1525-2.4776-2.9882 0-1.8356 1.0201-2.9881 2.4776-2.9881.6064 0 1.0744.2497 1.3984.5996zm-1.0778 5.2922c.9668 0 1.3622-.7655 1.3622-1.7929 0-1.0273-.3954-1.7928-1.3622-1.7928-.9667 0-1.362.7655-1.362 1.7928 0 1.0274.3953 1.7929 1.362 1.7929zM24 11.993c0 6.6178-5.3824 11.9929-12 11.9929-1.4223 0-2.7842-.2517-4.0494-.7109l-4.2939 1.1283c-.6266.1653-1.1526-.4074-1.0504-.9946l.8361-4.7571C2.6873 17.3174 2.4 15.0775 2.4 11.993 2.4 5.3752 7.3824 0 14 0s10 5.3752 10 11.993z" transform="translate(-2.4)" />
+                                </svg>
+                            </div>
+                            <div class="btn-content">
+                                <span class="btn-meta">Nhắn tin Zalo nhanh</span>
+                                <span class="btn-title">0988 493 910</span>
+                            </div>
+                        </div>
+                        <div class="btn-arrow">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- THANH CÔNG CỤ NHANH: MÃ QR & SAO CHÉP BIO -->
+                <div class="quick-actions">
+                    <button class="action-tool-btn" id="openQrBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span>Mã QR Kết Nối</span>
+                    </button>
+                    <button class="action-tool-btn" id="copyBioLinkBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                        <span>Sao chép Bio Link</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- FOOTER HIGH-TECH -->
+            <div class="footer">
+                <div>
+                    Made with <span class="cyber-heart">⚡</span> by <strong>Trần Phi Hải</strong> &copy; <span id="yearVal">2025</span>
+                </div>
+                <div class="footer-specs">
+                    <span>BUILD: VER 2.8_TECH</span>
+                    <span>•</span>
+                    <span>LATENCY: 14MS</span>
+                    <span>•</span>
+                    <span>STATUS: OPTIMAL</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL HIỂN THỊ MÃ QR HIGH-TECH -->
+    <div class="qr-modal" id="qrModal">
+        <div class="qr-card">
+            <button class="qr-close-btn" id="closeQrBtn" title="Đóng">✕</button>
+            <div class="hud-status" style="justify-content: center; margin-bottom: 8px;">
+                <span class="pulse-dot"></span>
+                <span>CYBER QR IDENTIFIER</span>
+            </div>
+            <h3 style="font-family: var(--font-head); font-size: 20px; color: #fff;">Quét Mã Kết Nối Zalo</h3>
+            <p style="font-size: 13px; color: var(--text-sub); margin-top: 4px;">Dùng camera điện thoại hoặc Zalo để quét</p>
+
+            <div class="qr-box">
+                <div class="qr-laser-line"></div>
+                <!-- Mã QR tạo trực tiếp qua API QR -->
+                <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://zalo.me/0988493910&color=060813" alt="QR Code Trần Phi Hải">
+            </div>
+
+            <p style="font-family: var(--font-mono); font-size: 13px; color: var(--cyan-neon); font-weight: 700;">Zalo: 0988 493 910</p>
+        </div>
+    </div>
+
+    <!-- TOAST THÔNG BÁO HUD -->
+    <div class="hud-toast" id="hudToast">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--cyan-neon);">
+            <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span id="toastText">Đã sao chép thành công!</span>
+    </div>
+
+    <!-- SCRIPT HIỆU ỨNG CÔNG NGHỆ HIỆN ĐẠI -->
+    <script>
+        /* ==== 1. HỆ THỐNG ÂM THANH SCI-FI (WEB AUDIO API) ==== */
+        let sfxEnabled = true;
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx && AudioContext) {
+                audioCtx = new AudioContext();
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playSciFiSound(type = 'blip') {
+            if (!sfxEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                if (!ctx) return;
+
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                const now = ctx.currentTime;
+
+                if (type === 'hover') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(480, now);
+                    osc.frequency.exponentialRampToValueAtTime(720, now + 0.06);
+                    gain.gain.setValueAtTime(0.02, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+                    osc.start(now);
+                    osc.stop(now + 0.06);
+                } else if (type === 'click') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(800, now);
+                    osc.frequency.exponentialRampToValueAtTime(1400, now + 0.08);
+                    gain.gain.setValueAtTime(0.06, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+                    osc.start(now);
+                    osc.stop(now + 0.08);
+                } else if (type === 'success') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+                    osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+                    gain.gain.setValueAtTime(0.05, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+                    osc.start(now);
+                    osc.stop(now + 0.28);
+                }
+            } catch (e) {
+                // Trình duyệt chưa cho phép audio
+            }
+        }
+
+        // Nút bật tắt âm thanh SFX
+        const soundToggleBtn = document.getElementById('soundToggleBtn');
+        const soundStatusText = document.getElementById('soundStatusText');
+        soundToggleBtn.addEventListener('click', () => {
+            sfxEnabled = !sfxEnabled;
+            soundStatusText.textContent = sfxEnabled ? 'SFX: ON' : 'SFX: OFF';
+            soundToggleBtn.style.color = sfxEnabled ? 'var(--cyan-neon)' : 'var(--text-sub)';
+            if (sfxEnabled) playSciFiSound('success');
+            showToast(sfxEnabled ? 'Âm thanh Sci-Fi: ĐANG BẬT 🔊' : 'Đã tắt âm thanh Sci-Fi 🔇');
+        });
+
+        /* ==== 2. HIỆU ỨNG HẠT MẠNG LƯỚI CÔNG NGHỆ (CANVAS CONSTELLATION) ==== */
+        const canvas = document.getElementById('cyber-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = Math.min(Math.floor(width * 0.05), 65);
+        let mouseX = -1000;
+        let mouseY = -1000;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.radius = Math.random() * 2 + 1;
+                this.color = Math.random() > 0.4 ? 'rgba(0, 242, 254,' : 'rgba(168, 85, 247,';
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                // Tương tác khi di chuột qua hạt
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) {
+                    this.x -= (dx / dist) * 1.5;
+                    this.y -= (dy / dist) * 1.5;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color + ' 0.7)';
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#00f2fe';
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Vẽ các đường nối công nghệ giữa các hạt
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(0, 242, 254, ${0.25 * (1 - dist / 130)})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        /* ==== 3. HIỆU ỨNG 3D TILT CARD & CARD GLARE ==== */
+        const cardContainer = document.getElementById('cardContainer');
+        const profileCard = document.getElementById('profileCard');
+
+        if (window.innerWidth > 768) {
+            window.addEventListener('mousemove', (e) => {
+                const rect = profileCard.getBoundingClientRect();
+                const cardX = rect.left + rect.width / 2;
+                const cardY = rect.top + rect.height / 2;
+
+                const rotX = (e.clientY - cardY) / 28;
+                const rotY = -(e.clientX - cardX) / 28;
+
+                cardContainer.style.transform = `rotateX(${Math.max(Math.min(rotX, 10), -10)}deg) rotateY(${Math.max(Math.min(rotY, 10), -10)}deg)`;
+
+                // Vị trí tia sáng vệt chiếu chuột
+                const glareX = ((e.clientX - rect.left) / rect.width) * 100;
+                const glareY = ((e.clientY - rect.top) / rect.height) * 100;
+                profileCard.style.setProperty('--mouse-x', `${glareX}%`);
+                profileCard.style.setProperty('--mouse-y', `${glareY}%`);
+            });
+
+            cardContainer.addEventListener('mouseleave', () => {
+                cardContainer.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            });
+        }
+
+        /* ==== 4. HOVER SOUNDS CHO CÁC NÚT TƯƠNG TÁC ==== */
+        const interactiveElements = document.querySelectorAll('.cyber-btn, .info-card, .action-tool-btn, .copy-btn, .hud-action-btn');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => playSciFiSound('hover'));
+            el.addEventListener('click', () => playSciFiSound('click'));
+        });
+
+        /* ==== 5. SAO CHÉP SĐT & BIO LINK VỚI TOAST HUD ==== */
+        const hudToast = document.getElementById('hudToast');
+        const toastText = document.getElementById('toastText');
+        let toastTimer = null;
+
+        function showToast(message) {
+            clearTimeout(toastTimer);
+            toastText.textContent = message;
+            hudToast.classList.add('show');
+            playSciFiSound('success');
+            toastTimer = setTimeout(() => {
+                hudToast.classList.remove('show');
+            }, 2600);
+        }
+
+        document.getElementById('copyPhoneBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            navigator.clipboard.writeText('0988493910');
+            showToast('Đã sao chép Hotline: 0988 493 910 📱');
+        });
+
+        document.getElementById('copyBioLinkBtn').addEventListener('click', () => {
+            navigator.clipboard.writeText(window.location.href);
+            showToast('Đã sao chép đường link cá nhân! 🚀');
+        });
+
+        document.getElementById('shareBtn').addEventListener('click', () => {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Trần Phi Hải — Profile Công Nghệ',
+                    text: 'Xem thông tin cá nhân của Trần Phi Hải (Lớp A2 - THPT Tân Yên Số 2)',
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                showToast('Đã sao chép liên kết chia sẻ! 🔗');
+            }
+        });
+
+        /* ==== 6. MODAL MÃ QR HIỆN ĐẠI ==== */
+        const qrModal = document.getElementById('qrModal');
+        const openQrBtn = document.getElementById('openQrBtn');
+        const closeQrBtn = document.getElementById('closeQrBtn');
+
+        openQrBtn.addEventListener('click', () => {
+            qrModal.classList.add('active');
+            playSciFiSound('click');
+        });
+
+        closeQrBtn.addEventListener('click', () => {
+            qrModal.classList.remove('active');
+            playSciFiSound('click');
+        });
+
+        qrModal.addEventListener('click', (e) => {
+            if (e.target === qrModal) {
+                qrModal.classList.remove('active');
+            }
+        });
+
+        // Cập nhật năm tự động
+        document.getElementById('yearVal').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
